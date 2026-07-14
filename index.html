@@ -2,41 +2,29 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Идеально совместимые версии библиотек -->
+    <!-- Железобетонная связка версий без багов -->
     <script src="https://aframe.io"></script>
     <script src="https://jsdelivr.net"></script>
+    <script src="https://jsdelivr.net"></script>
+    
     <style>
       body { margin: 0; overflow: hidden; }
+      .a-enter-vr { display: none !important; }
     </style>
   </head>
   <body>
-
-    <!-- Инициализация сцены с базовыми настройками -->
-    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" 
-             color-space="sRGB" 
-             renderer="colorManagement: true, physicallyCorrectLights" 
-             vr-mode-ui="enabled: false" 
-             device-orientation-permission-ui="enabled: false">
-      
+    <!-- Инициализация AR-сцены -->
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
-        <!-- Загрузка вашей 3D модели -->
         <a-asset-item id="myModel" src="./scene.glb"></a-asset-item>
       </a-assets>
 
-      <!-- Камера AR -->
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- Точка привязки к первому маркеру из файла targets.mind -->
+      <!-- Привязка к первому маркеру из файла .mind -->
       
-        <!-- Сама модель. Добавили параметр animation-mixer для анимации из Blender -->
-        <a-gltf-model src="#myModel" 
-                      position="0 0 0" 
-                      rotation="0 0 0" 
-                      scale="1 1 1" 
-                      animation-mixer>
-        </a-gltf-model>
+        <a-gltf-model src="#myModel" animation-mixer></a-gltf-model>
       
-
     </a-scene>
   </body>
 </html>
