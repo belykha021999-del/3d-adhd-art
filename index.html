@@ -1,31 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Железобетонная связка версий без багов -->
+    <title>AR Graffiti - Ready</title>
+    
+    <!-- Железобетонная и стабильная связка библиотек без конфликтов версий -->
     <script src="https://aframe.io"></script>
     <script src="https://jsdelivr.net"></script>
     <script src="https://jsdelivr.net"></script>
     
     <style>
-      body { margin: 0; overflow: hidden; }
-      .a-enter-vr { display: none !important; }
+      /* Растягиваем камеру на весь экран без рамок и скроллов */
+      body { 
+        margin: 0; 
+        overflow: hidden; 
+        background-color: #000; 
+      }
+      /* Принудительно скрываем системную кнопку VR от A-Frame в углу */
+      .a-enter-vr { 
+        display: none !important; 
+      }
     </style>
   </head>
   <body>
-    <!-- Инициализация AR-сцены -->
-    <a-scene mindar-image="imageTargetSrc: https://github.io;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+
+    <!-- Инициализация AR-сцены с прямым абсолютным путем к твоему маркеру -->
+    <a-scene mindar-image="imageTargetSrc: https://github.io;" 
+             vr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: false">
+      
       <a-assets>
-        <a-asset-item id="myModel" src="scene.glb"></a-asset-item>
+        <!-- Прямой абсолютный путь к твоей 3D модели из Blender -->
+        <a-asset-item id="myModel" src="https://github.io"></a-asset-item>
       </a-assets>
 
-
+      <!-- Главная AR камера телефона -->
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- Привязка к первому маркеру из файла .mind -->
+      <!-- Точка привязки к твоему граффити (первый маркер в файле .mind) -->
       
+        <!-- Отображение модели и автоматический запуск анимации из Blender -->
         <a-gltf-model src="#myModel" animation-mixer></a-gltf-model>
       
+      
     </a-scene>
+
   </body>
 </html>
