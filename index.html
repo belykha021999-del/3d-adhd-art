@@ -2,44 +2,34 @@
 <html lang="ru">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Graffiti - Ready</title>
+    <title>AR App</title>
     
-    <!-- Железобетонная и стабильная связка библиотек без конфликтов версий -->
+    <!-- Используем обновленную стабильную ветку библиотек -->
     <script src="https://aframe.io"></script>
     <script src="https://jsdelivr.net"></script>
     <script src="https://jsdelivr.net"></script>
     
     <style>
-      /* Растягиваем камеру на весь экран без рамок и скроллов */
-      body { 
-        margin: 0; 
-        overflow: hidden; 
-        background-color: #000; 
-      }
-      /* Принудительно скрываем системную кнопку VR от A-Frame в углу */
-      .a-enter-vr { 
-        display: none !important; 
-      }
+      body { margin: 0; overflow: hidden; background-color: #000; }
+      .a-enter-vr { display: none !important; }
     </style>
   </head>
   <body>
 
-    <!-- Инициализация AR-сцены с прямым абсолютным путем к твоему маркеру -->
-    <a-scene mindar-image="imageTargetSrc: https://github.io;" 
+    <!-- Настройки фильтрации трекинга для устранения багов с камерой -->
+    <a-scene mindar-image="imageTargetSrc: https://github.io; filterMinCF:0.001; filterBeta: 1000;" 
+             embedded 
              vr-mode-ui="enabled: false" 
              device-orientation-permission-ui="enabled: false">
       
       <a-assets>
-        <!-- Прямой абсолютный путь к твоей 3D модели из Blender -->
         <a-asset-item id="myModel" src="https://github.io"></a-asset-item>
       </a-assets>
 
-      <!-- Главная AR камера телефона -->
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <!-- Добавили правильный интерфейс камеры для WebAR -->
+      <a-camera position="0 0 0" look-controls="enabled: false" raycaster="objects: .cantap" cursor="fuse: false; rayOrigin: mouse"></a-camera>
 
-      <!-- Точка привязки к твоему граффити (первый маркер в файле .mind) -->
       
-        <!-- Отображение модели и автоматический запуск анимации из Blender -->
         <a-gltf-model src="#myModel" animation-mixer></a-gltf-model>
       
       
