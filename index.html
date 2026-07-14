@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Подключаем фреймворк A-Frame для работы с 3D на веб-страницах -->
+    <script src="https://aframe.io"></script>
+    <!-- Подключаем библиотеку MindAR для распознавания изображений (Image Tracking) -->
+    <script src="https://jsdelivr.net"></script>
+  </head>
+  <body>
+
+    <!-- Настройка AR-сцены. Указываем путь к скомпилированному маркеру .mind -->
+    <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <!-- Загружаем вашу 3D-модель .glb из Blender -->
+        <a-asset-item id="myModel" src="./scene.glb"></a-asset-item>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- Указываем targetIndex: 0 (первое изображение в файле .mind) -->
+      
+        <!-- Размещаем модель, задаем масштаб, вращение и запускаем анимацию из файла -->
+        <a-gltf-model src="#myModel" 
+                      position="0 0 0" 
+                      rotation="0 0 0" 
+                      scale="1 1 1" 
+                      animation-mixer>
+        </a-gltf-model>
+      
+
+    </a-scene>
+  </body>
+</html>
