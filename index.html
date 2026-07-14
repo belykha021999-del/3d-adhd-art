@@ -1,37 +1,34 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR App</title>
-    
-    <!-- Используем обновленную стабильную ветку библиотек -->
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>AR Graffiti Simple</title>
+    <!-- Базовый фреймворк 3D -->
     <script src="https://aframe.io"></script>
+    <!-- Открытый движок AR.js -->
+    <script src="https://githack.com"></script>
+    <!-- Проигрыватель анимации из Blender -->
     <script src="https://jsdelivr.net"></script>
-    <script src="https://jsdelivr.net"></script>
-    
     <style>
       body { margin: 0; overflow: hidden; background-color: #000; }
-      .a-enter-vr { display: none !important; }
     </style>
   </head>
   <body>
 
-    <!-- Настройки фильтрации трекинга для устранения багов с камерой -->
-    <a-scene mindar-image="imageTargetSrc: https://github.io; filterMinCF:0.001; filterBeta: 1000;" 
-             embedded 
-             vr-mode-ui="enabled: false" 
-             device-orientation-permission-ui="enabled: false">
+    <!-- Инициализация камеры (работает везде, без багов) -->
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
       
       <a-assets>
-        <a-asset-item id="myModel" src="https://github.io"></a-asset-item>
+        <!-- Относительный путь к твоей рабочей модели -->
+        <a-asset-item id="myModel" src="scene.glb"></a-asset-item>
       </a-assets>
 
-      <!-- Добавили правильный интерфейс камеры для WebAR -->
-      <a-camera position="0 0 0" look-controls="enabled: false" raycaster="objects: .cantap" cursor="fuse: false; rayOrigin: mouse"></a-camera>
+      <!-- Готовый стандартный маркер 'hiro' (вшит в библиотеку по умолчанию) -->
+      <a-marker preset="hiro">
+        <!-- Твоя модель. scale (масштаб) можно крутить прямо тут -->
+        <a-gltf-model src="#myModel" position="0 0 0" rotation="0 0 0" scale="1 1 1" animation-mixer></a-gltf-model>
+      </a-marker>
 
-      
-        <a-gltf-model src="#myModel" animation-mixer></a-gltf-model>
-      
       
     </a-scene>
 
